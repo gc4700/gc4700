@@ -1,14 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>A-FrameGLTF Exporter (updated ver.)</title>
+    <title>ASSEMBLER</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-animation-component@3.2.1/dist/aframe-animation-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-extras.ocean@%5E3.5.x/dist/aframe-extras.ocean.min.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script>
+    <script src="https://unpkg.com/super-hands/dist/super-hands.min.js"></script>
+    <script src="https://cdn.rawgit.com/donmccurdy/aframe-physics-system/v3.1.2/dist/aframe-physics-system.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@^4.1.1/dist/aframe-event-set-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-physics-extras/dist/aframe-physics-extras.min.js"></script>
+    <script src="https://unpkg.com/aframe-ground-component@0.0.4/dist/aframe-ground-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-snapto-component/dist/aframe-snapto-component.js"></script>
+    <script src="https://unpkg.com/aframe-layout-component@4.3.1/dist/aframe-layout-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-orbit-controls@1.2.0/dist/aframe-orbit-controls.min.js"></script>
+
+    <script src="https://unpkg.com/aframe-datgui-component/dist/aframe-datgui-component.min.js"></script>
+    <script src="https://cdn.rawgit.com/gftruj/aframe-physics-spring/master/dist/aframe-spring.min.js"></script>
+    <script src="https://unpkg.com/aframe-spherical-controls-component/dist/aframe-spherical-controls-component.min.js"></script>
+    <script src="https://rawgit.com/chenzlabs/auto-detect-controllers/master/dist/aframe-auto-detect-controllers-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-gltf-helpers@0.0.2/dist/aframe-gltf-helpers.min.js"></script>
+    <script src="https://rawgit.com/dbradleyfl/aframe-gridhelper/master/dist/aframe-gridhelper-component.min.js"></script>
+    <script src="https://rawgit.com/dbradleyfl/aframe-selectable-light-component/master/dist/aframe-selectable-light-component.min.js"></script>
+    <script src="https://supereggbert.github.io/aframe-htmlembed-component/dist/build.js"></script>
+    
     <script src="js/aframe-gltf-exporter.js"></script>
     <script src="js/gltf-exporter-component.js"></script>
-    <script src="https://supereggbert.github.io/aframe-htmlembed-component/dist/build.js"></script>
-    <link rel="stylesheet" href="css/style.css">
+    
+    <script src="aframe-gltf-exporter-component.min.js"></script>
+
+    <script src="js/aframe-extras.min.js"></script>
+    <script src="js/aframe-extras.controls.mih.js"></script>
+    <script src="js/aframe-extras.misc.js"></script>
+    <script src="js/aframe-extras.loaders.js"></script>
+    <script src="js/aframe-extras.pathfinding.js"></script>
+    <script src="js/aframe-extras.primitives.js"></script>
+    <script src="js/aframe-point-component.min.js"></script>
+    <script src="js/aframe-alongpath-component.min.js"></script>
+    <script src="js/aframe-layout-component.min.js"></script>
+    <script src="js/aframe-screenshot-component.min.js"></script>
+    <script src="js/aframe-gltfutils.min.js"></script>
+
+    <script src="js/grab.js"></script>
+    <script src="js/grab.min.js"></script>
+    <script src="js/grab-lock.js"></script>
+    <script src="js/GLTFPart.js"></script>
+    <script src="js/Vartiste.js"></script>
+
+    <script src="js/RegisteredAF.js"></script>
+    <script src="js/manipulator.js"></script>
+    <script src="js/movement-controls.js"></script>
+    <script src="js/PointCloudPLY.js"></script>
+
+    <script src="js/aframe-drag-and-drop-component.min.js"></script>
+    <script src="js/aframe-crawling-cursor.min.js"></script>
+
+    <!--reaction components-->
+    <script src="reaction_components/clickable.js"></script>
+    <script src="reaction_components/draggable.js"></script>
+    <script src="reaction_components/drag-droppable.js"></script>
+    <script src="reaction_components/hoverable.js"></script>
+    <script src="reaction_components/stretchable.js"></script>
+    <script src="reaction_components/droppable.js"></script>
+    <script src="reaction_components/grabbable.js"></script>
+
+
+    <script>
+        //color randomizer
+        AFRAME.registerComponent('color-randomizer', {
+            play: function () {
+                this.el.addEventListener('drag-drop', function (evt) {
+                    evt.detail.dropped.setAttribute('material', 'color',
+                        '#' + (Math.random() * 0xFFFFFF << 0).toString(16))
+                    // color randomizer credit: http://stackoverflow.com/questions/1484506/random-color-generator-in-javascript#comment6801353_5365036
+                })
+            }
+        })
+        // forward mouse and touch events to the super-hands entity
+        AFRAME.registerComponent('capture-mouse', {
+            init: function () {
+                this.eventRepeater = this.eventRepeater.bind(this)
+                this.el.sceneEl.addEventListener('loaded', () => {
+                    this.el.sceneEl.canvas.addEventListener('mousedown', this.eventRepeater)
+                    this.el.sceneEl.canvas.addEventListener('mouseup', this.eventRepeater)
+                    this.el.sceneEl.canvas.addEventListener('touchstart', this.eventRepeater)
+                    this.el.sceneEl.canvas.addEventListener('touchmove', this.eventRepeater)
+                    this.el.sceneEl.canvas.addEventListener('touchend', this.eventRepeater)
+                }, { once: true })
+            },
+            eventRepeater: function (evt) {
+                if (evt.type.startsWith('touch')) {
+                    evt.preventDefault()
+                    // avoid repeating touchmove because it interferes with look-controls
+                    if (evt.type === 'touchmove') { return }
+                }
+                this.el.emit(evt.type, evt.detail)
+            }
+        })
+        //click-imoulse
+        AFRAME.registerComponent('click-impulse', {
+            init: function () {
+                var el = this.el;
+
+                el.addEventListener('click', function () {
+                    el.body.applyImpulse(
+                        /* impulse */
+                        new CANNON.Vec3(
+                            THREE.Math.randInt(-20, 20),
+                            THREE.Math.randInt(-20, 20),
+                            THREE.Math.randInt(-20, 20)
+                        ),
+                                                        /* world position */ new CANNON.Vec3().copy(el.getDOMAttribute('position'))
+                    );
+                });
+
+            }
+        });
+
+    </script>
+
+    <link rel="stylesheet" type="text/css" href="aframe.css">
+
+
+
+    
 </head>
 
 <body>
@@ -35,19 +152,23 @@
             <img id="img4" src="img/CAM4.jpg">
             <img id="img5" src="img/CAM5.jpg">
             <img id="img6" src="img/CAM6.jpg">
+            
+            <a-asset-item id="bb030" src="https://cdn.glitch.me/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538%2Fplanex1sq.glb?v=1635660167471"></a-asset-item>
+
+            
         </a-assets>
         
         <a-entity id="prtassy" position="0 0 0" rotation="0 0 0" scale="1 1 1" >
-            <a-gltf-model id="#part0" src="#prt0" position="0 0 0" rotation="0 0 0" scale="1 1 1"  >
-                <a-gltf-model id="#part1" src="#prt0" position="0 0 0" rotation="0 0 0" scale="1 1 1"  ><a-gltf-model>
-                <a-gltf-model id="#part2" src="#prt0" position="0 0 0" rotation="0 0 0" scale="1 1 1"  ><a-gltf-model>
-                <a-gltf-model id="#part3" src="#prt0" position="0 0 0" rotation="0 0 0" scale="1 1 1"  ><a-gltf-model>    
-                <a-gltf-model id="#part4" src="#prt0" position="0 0 0" rotation="0 0 0" scale="1 1 1"  ><a-gltf-model>
-                <a-gltf-model id="#part5" src="#prt0" position="0 0 0" rotation="0 0 0" scale="1 1 1"  ><a-gltf-model>
-                <a-gltf-model id="#part6" src="#prt0" position="0 0 0" rotation="0 0 0" scale="1 1 1"  ><a-gltf-model>        
-                <a-gltf-model id="#part7" src="#prt0" position="0 0 0" rotation="0 0 0" scale="1 1 1"  ><a-gltf-model>
-                <a-gltf-model id="#part8" src="#prt0" position="0 0 0" rotation="0 0 0" scale="1 1 1"  ><a-gltf-model>
-                <a-gltf-model id="#part9" src="#prt0" position="0 0 0" rotation="0 0 0" scale="1 1 1"  ><a-gltf-model>               
+            <a-gltf-model id="#part0" src="#prt0" position="0 0 0" rotation="0 0 0" scale="1 1 1" layout="type:circle;radius:3" >
+                <a-gltf-model id="#part1" src="#bb030" position="0 0 0" rotation="0 0 0" scale="1 1 1"  ><a-gltf-model>
+                <a-gltf-model id="#part2" src="#bb030" position="0 0 0" rotation="0 0 0" scale="1 1 1"  ><a-gltf-model>
+                <a-gltf-model id="#part3" src="#bb030" position="0 0 0" rotation="0 0 0" scale="1 1 1"  ><a-gltf-model>    
+                <a-gltf-model id="#part4" src="#bb030" position="0 0 0" rotation="0 0 0" scale="1 1 1"  ><a-gltf-model>
+                <a-gltf-model id="#part5" src="#bb030" position="0 0 0" rotation="0 0 0" scale="1 1 1"  ><a-gltf-model>
+                <a-gltf-model id="#part6" src="#bb030" position="0 0 0" rotation="0 0 0" scale="1 1 1"  ><a-gltf-model>        
+                <a-gltf-model id="#part7" src="#bb030" position="0 0 0" rotation="0 0 0" scale="1 1 1"  ><a-gltf-model>
+                <a-gltf-model id="#part8" src="#bb030" position="0 0 0" rotation="0 0 0" scale="1 1 1"  ><a-gltf-model>
+                <a-gltf-model id="#part9" src="#bb030" position="0 0 0" rotation="0 0 0" scale="1 1 1"  ><a-gltf-model>               
                     
             <a-gltf-model>
                 
