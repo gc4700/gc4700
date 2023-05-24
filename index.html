@@ -1,11 +1,165 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<title>Page Title</title>
+    <title>A-FrameGLTF Exporter (updated ver.)</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <script src="js/aframe-gltf-exporter.js"></script>
+    <script src="js/gltf-exporter-component.js"></script>
+    <script src="https://supereggbert.github.io/aframe-htmlembed-component/dist/build.js"></script>
+    <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
+    <a-scene gltf-exporter>
+        <a-assets>
+            <a-asset-item id="prt0" src="3d/part0.glb"></a-asset-item>
+            <a-asset-item id="prt1" src="3d/part1.glb"></a-asset-item>
+            <a-asset-item id="prt2" src="3d/part2.glb"></a-asset-item>
+            <a-asset-item id="prt3" src="3d/part3.glb"></a-asset-item>
+            <a-asset-item id="prt4" src="3d/part4.glb"></a-asset-item>
+            <a-asset-item id="prt5" src="3d/part5.glb"></a-asset-item>
+            <a-asset-item id="prt6" src="3d/part6.glb"></a-asset-item>
+            <a-asset-item id="prt7" src="3d/part7.glb"></a-asset-item>
+            <a-asset-item id="prt8" src="3d/part8.glb"></a-asset-item>
+            <a-asset-item id="prt9" src="3d/part9.glb"></a-asset-item>
+            
+            
+            
+            
+            
+            <img id="img1" src="img/CAM1.jpg">
+            <img id="img2" src="img/CAM2.jpg">
+            <img id="img3" src="img/CAM3.jpg">
+            <img id="img4" src="img/CAM4.jpg">
+            <img id="img5" src="img/CAM5.jpg">
+            <img id="img6" src="img/CAM6.jpg">
+        </a-assets>
+        
+        <a-entity id="prtassy" position="0 0 0" rotation="0 0 0" scale="1 1 1" >
+            <a-gltf-model id="#part0" src="#prt0" position="0 0 0" rotation="0 0 0" scale="1 1 1"  >
+                <a-gltf-model id="#part1" src="#prt0" position="0 0 0" rotation="0 0 0" scale="1 1 1"  ><a-gltf-model>
+                <a-gltf-model id="#part2" src="#prt0" position="0 0 0" rotation="0 0 0" scale="1 1 1"  ><a-gltf-model>
+                <a-gltf-model id="#part3" src="#prt0" position="0 0 0" rotation="0 0 0" scale="1 1 1"  ><a-gltf-model>    
+                <a-gltf-model id="#part4" src="#prt0" position="0 0 0" rotation="0 0 0" scale="1 1 1"  ><a-gltf-model>
+                <a-gltf-model id="#part5" src="#prt0" position="0 0 0" rotation="0 0 0" scale="1 1 1"  ><a-gltf-model>
+                <a-gltf-model id="#part6" src="#prt0" position="0 0 0" rotation="0 0 0" scale="1 1 1"  ><a-gltf-model>        
+                <a-gltf-model id="#part7" src="#prt0" position="0 0 0" rotation="0 0 0" scale="1 1 1"  ><a-gltf-model>
+                <a-gltf-model id="#part8" src="#prt0" position="0 0 0" rotation="0 0 0" scale="1 1 1"  ><a-gltf-model>
+                <a-gltf-model id="#part9" src="#prt0" position="0 0 0" rotation="0 0 0" scale="1 1 1"  ><a-gltf-model>               
+                    
+            <a-gltf-model>
+                
+              <a-gltf-model id="floor" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/ground-plane_with_mesh.glb?v=1678034073866" position="0 0 0" rotation="0 0 0" scale="1 1 1" static-body ><a-gltf-model>               
+                      
+                
+        </a-entity>
+
+
+        <a-entity id="cam1" position="0 0 0" cursor="fuse: false; rayOrigin: mouse;" raycaster="objects: .navButton">
+        </a-entity>
+        
+        <a-entity id="cam2" position="0 0 0" cursor="fuse: false; rayOrigin: mouse;" raycaster="objects: .navButton">
+        </a-entity>
+        
+        <a-entity id="cam3" position="0 0 0" cursor="fuse: false; rayOrigin: mouse;" raycaster="objects: .navButton">
+        </a-entity>
+        
+        <a-entity id="cam4" position="0 0 0" cursor="fuse: false; rayOrigin: mouse;" raycaster="objects: .navButton">
+        </a-entity>
+        
+        <a-entity id="cam5" position="0 0 0" cursor="fuse: false; rayOrigin: mouse;" raycaster="objects: .navButton">
+        </a-entity>
+        
+        <a-entity id="cam6" position="0 0 0" cursor="fuse: false; rayOrigin: mouse;" raycaster="objects: .navButton">
+        </a-entity>
+
+        <a-entity id="export-scene" class="navButton" geometry="primitive: plane;"
+            material="src: #img1; transparent: true; opacity: 1; alpha-test: 0.5" position="-2.5 2.5 -2"
+            scale="0.5 0.5 0.5"></a-entity>
+
+        <a-entity id="export-html" class="navButton" geometry="primitive: plane;"
+            material="src: #img2; transparent: true; opacity: 1; alpha-test: 0.5" position="-1.5 2.5 -2"
+            scale="0.5 0.5 0.5"></a-entity>
+
+        <a-entity id="primitive" class="navButton" geometry="primitive: plane;"
+            material="src: #img3; transparent: true; opacity: 1; alpha-test: 0.5" position="-0.5 2.5 -2"
+            scale="0.5 0.5 0.5"></a-entity>
+
+        <a-entity id="primitiveBinary" class="navButton" geometry="primitive: plane;"
+            material="src: #img4; transparent: true; opacity: 1; alpha-test: 0.5" position="0.5 2.5 -2"
+            scale="0.5 0.5 0.5"></a-entity>
+        
+            <a-entity id="exportTwo" class="navButton" geometry="primitive: plane;"
+            material="src: #img5; transparent: true; opacity: 1; alpha-test: 0.5" position="1.5 2.5 -2"
+            scale="0.5 0.5 0.5"></a-entity>
+        
+            <a-entity id="export3d" class="navButton" geometry="primitive: plane;"
+            material="src: #img6; transparent: true; opacity: 1; alpha-test: 0.5" position="2.5 2.5 -2"
+            scale="0.5 0.5 0.5"></a-entity>
 
 
 
+        <a-entity id="emb" width="4" height="4" side="double" position="0 1 -2" htmlembed>
+            <div class="notepad">
+
+                <div id="content" class="paper" contenteditable="true">
+                    This is an example scene
+                </div>
+            </div>
+        </a-entity>
+        <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
+        <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
+        <a-cylinder id="cylinder" position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
+        <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
+
+        <a-entity id="model" gltf-model="#fish" rotation="0 90 0" position="2 1 -2" scale="0.02 0.02 0.02">
+        </a-entity>
+    </a-scene>
+
+
+    <script>
+        var embeddedHTML = document.querySelector("#emb");
+        var cylinder = document.getElementById("cylinder");
+        var box = document.querySelector("a-box");
+
+
+        // Export GLTF (GLB). This needs to be present, always!
+        function exportGLTF(input, options) {
+            AFRAME.scenes[0].systems['gltf-exporter'].export(input, options);
+        }
+
+
+        // Export whole scene
+        document.getElementById("export-scene").addEventListener("click", function () {
+            exportGLTF();
+        });
+
+        // Export HTML containing entity
+        document.getElementById("export-html").addEventListener("click", function () {
+            exportGLTF(embeddedHTML);
+        });
+
+        // Export primitive as GLTF
+        document.getElementById("primitive").addEventListener("click", function () {
+            exportGLTF(cylinder);
+        });
+
+        // Export primitive as GLB
+        document.getElementById("primitiveBinary").addEventListener("click", function () {
+            exportGLTF(box, { binary: true });
+        });
+
+        // Export more than one entity
+        document.getElementById('exportTwo').addEventListener('click', function () {
+            exportGLTF([document.querySelector("a-box"), document.getElementById("cylinder")]);
+        });
+
+        // Export 3d model
+        document.getElementById('export3d').addEventListener('click', function () {
+            exportGLTF(document.querySelector("#model"));
+        });
+    </script>
 </body>
 </html>
