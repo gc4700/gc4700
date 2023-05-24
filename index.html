@@ -159,7 +159,7 @@
         </a-assets>
         
         <a-entity id="prtassy" position="0 0 0" rotation="0 0 0" scale="1 1 1"  static-body >
-            <a-gltf-model id="#part0" src="#prt0" position="0 0 0" rotation="0 0 0" scale="1 1 1" layout="type:circle;radius:3" >
+            <a-entity id="#part0" gltf-model="#prt0" position="0 0 0" rotation="0 0 0" scale="1 1 1" layout="type:circle;radius:3" >
                 <a-gltf-model id="#part1" src="#bb030" rotation="0 0 0" scale="1 1 1" static-body ><a-gltf-model>
                 <a-gltf-model id="#part2" src="#bb030" rotation="0 0 0" scale="1 1 1"  static-body  ><a-gltf-model>
                 <a-gltf-model id="#part3" src="#bb030" rotation="0 0 0" scale="1 1 1"  static-body  ><a-gltf-model>    
@@ -170,13 +170,11 @@
                 <a-gltf-model id="#part8" src="#bb030" rotation="0 0 0" scale="1 1 1"  static-body  ><a-gltf-model>
                 <a-gltf-model id="#part9" src="#bb030" rotation="0 0 0" scale="1 1 1"  static-body  ><a-gltf-model>               
                     
-            <a-gltf-model>
-                
-              <a-gltf-model id="floor" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/ground-plane_with_mesh.glb?v=1678034073866" position="0 0 0" rotation="0 0 0" scale="1 1 1" static-body ><a-gltf-model>               
-                      
-                
+            <a-entity>               
         </a-entity>
-
+                    
+        <a-gltf-model id="floor" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/ground-plane_with_mesh.glb?v=1678034073866" position="0 0 0" rotation="0 0 0" scale="1 1 1" static-body ><a-gltf-model>               
+                    
 
         <a-entity id="cam1" position="0 0 0" cursor="fuse: false; rayOrigin: mouse;" raycaster="objects: .navButton">
         </a-entity>
